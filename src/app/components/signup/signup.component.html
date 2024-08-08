@@ -1,0 +1,80 @@
+<div class="container">
+  <div class="card">
+    <div class="left-section">
+      <img src="../../../assets/solvei8-On white bg.png" alt="Solvei8 Logo" class="logo">
+      <img
+        src="../../../assets/Illustration - Business, workflow, cowormeeting, conversation, discussion, team work, man, woman.png"
+        alt="Illustration" class="illustration">
+    </div>
+    <div class="right-section">
+      <div class="signup-box" *ngIf="!submitted">
+        <span class="goBack" (click)="onBack()" *ngIf="step==2"><img src="../../../assets/lets-icons_back.png">Go
+          back</span>
+        <h2>Create Account</h2>
+        <div class="progress-bar">
+          <div [ngClass]="step > 0 ? 'fill-progress': ''" class="progress"></div>
+          <div [ngClass]="step > 1 ? 'fill-progress': ''" class="progress"></div>
+        </div>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+          <ng-container *ngIf="step === 1">
+            <ng-container *ngIf="isPhoneNumber; else emailField">
+              <label for="email">Enter Phone Number</label>
+              <input id="mobile" name="phoneNumber" type="tel" placeholder="91+" formControlName="phoneNumber">
+            </ng-container>
+
+            <ng-template #emailField>
+              <label for="email">Enter Email ID</label>
+              <input id="email" name="email" type="email" placeholder="Enter full name" formControlName="email">
+            </ng-template>
+
+            <label for="name">Enter Full name</label>
+            <input id="name" name="name" type="text" placeholder="Full name" formControlName="name">
+
+            <label for="password">Create Password</label>
+            <input id="password" name="password" type="password" placeholder="Password" formControlName="password">
+          </ng-container>
+          <ng-container *ngIf="step === 2">
+            <label for="organisation-name">Organisation-name</label>
+            <input id="organisation-name" name="organizationName" type="text" formControlName="organizationName">
+
+            <label for="organisation-id">Organisation-id</label>
+            <input id="organisation-id" name="organizationId" type="text" formControlName="organizationId">
+
+            <label for="designation">Designation</label>
+            <select id="designation" formControlName="designation">
+              <option *ngFor="let designation of designations" [value]="designation">{{ designation }}</option>
+            </select>
+
+            <label for="birth-date">Birth-date</label>
+            <input id="birth-date" name="birthDate" type="date" formControlName="birthDate">
+
+            <div class="cityPincode">
+              <div class="field-wrapper">
+                <label for="city">City</label>
+                <input id="city" name="city" type="text" formControlName="city">
+              </div>
+
+              <div class="field-wrapper">
+                <label for="pincode">Pincode</label>
+                <input id="pincode" name="pincode" type="text" formControlName="pincode">
+                <div *ngIf="signupForm.get('pincode').hasError('pattern')">
+                  <small class="error-message">Pincode must be a 6-digit number</small>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
+          <button *ngIf="step === 1" type="button" (click)="onContinue()">Next</button>
+          <button *ngIf="step === 2" type="submit">Next</button>
+        </form>
+      </div>
+      <div class="welcome-box" *ngIf="submitted">
+        <img src="../../../assets/Group 3835.png" alt="">
+        <h2>Welcome to Solvei8!</h2>
+        <p>Redirecting you to the Login screen. This might take a few seconds..</p>
+      </div>
+    </div>
+  </div>
+</div>

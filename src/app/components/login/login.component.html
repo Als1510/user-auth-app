@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="card">
+    <div class="left-section">
+      <img src="../../../assets/solvei8-On white bg.png" alt="Solvei8 Logo" class="logo">
+      <img
+        src="../../../assets/Illustration - Business, workflow, cowormeeting, conversation, discussion, team work, man, woman.png"
+        alt="Illustration" class="illustration">
+    </div>
+    <div class="right-section">
+      <div class="login-box" *ngIf="!submitted">
+        <h2 class="login-text">Welcome Back, {{name}}!</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <ng-container *ngIf="isPhoneNumber; else emailField">
+            <label for="email">Enter Phone Number</label>
+            <input id="mobile" name="phoneNumber" type="tel" placeholder="91+" formControlName="phoneNumber">
+          </ng-container>
+
+          <ng-template #emailField>
+            <label for="email">Enter Email ID</label>
+            <input id="email" name="email" type="email" placeholder="Enter full name" formControlName="email">
+          </ng-template>
+
+          <label for="password">Enter Password</label>
+          <input id="password" name="password" type="password" placeholder="Password" formControlName="password">
+
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
+
+          <button type="submit">Next</button>
+        </form>
+      </div>
+      <div class="welcome-box" *ngIf="submitted">
+        <img src="../../../assets/Group 3835.png" alt="">
+        <h2 class="welcome-text">Logging you in....</h2>
+        <p>Kindly wait as we are curating the data accordingly.</p>
+      </div>
+    </div>
+  </div>
+</div>

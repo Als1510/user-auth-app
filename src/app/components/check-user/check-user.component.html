@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card">
+    <div class="left-section">
+      <img src="../../../assets/solvei8-On white bg.png" alt="Solvei8 Logo" class="logo">
+      <img
+        src="../../../assets/Illustration - Business, workflow, cowormeeting, conversation, discussion, team work, man, woman.png"
+        alt="Illustration" class="illustration">
+    </div>
+    <div class="right-section">
+      <div class="login-box">
+        <h2>Welcome</h2>
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+          <label for="email">Enter Email ID</label>
+          <input id="email" name="email" type="email" placeholder="Enter full name" formControlName="email">
+
+          <p class="or">(OR)</p>
+
+          <label for="mobile">Enter Mobile No.</label>
+          <input id="mobile" name="phoneNumber" type="tel" placeholder="91+" formControlName="phoneNumber">
+
+          <div *ngIf="error" class="error-message">
+            {{ error }}
+          </div>
+
+          <button type="submit">Next</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
